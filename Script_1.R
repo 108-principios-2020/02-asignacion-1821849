@@ -1,3 +1,7 @@
+# Daniela Victoria Cansino Rosales
+# Matrícula: 1821849
+# Fecha: 20.02.2020
+
 
 # Ejercicio 1 -------------------------------------------------------------
   
@@ -15,9 +19,11 @@ barplot(acc$freq, names.arg = acc$x, main = "Accidentes
 
 
 # ¿Cuál es el promedio de accidentes al mes?
+
 mean(accidentes)
 sum(accidentes)
 boxplot(accidentes)
+#El promedio de accidentes al mes es de 1.9
 
 # ¿Qué número de accidentes reporta la mayor proporción (%)?
 
@@ -45,7 +51,7 @@ esp
 
 
 barplot(esp$freq, names.arg = esp$x, main = "Cantidad de 
-        especies", col = "yellow")
+        especies", xlab="Especies", ylab="Frecuencia", col = "yellow")
 
 
 
@@ -54,8 +60,14 @@ barplot(esp$freq, names.arg = esp$x, main = "Cantidad de
 library(repmis)
 conjunto <- source_data("https://www.dropbox.com/s/hmsf07bbayxv6m3/cuadro1.csv?dl=1")
 
-vecyesp<- table(conjunto$Vecinos, conjunto$Especie)
-vecyesp
+# Encontrar la frecuencia de las variables vecinos y especies
+
+table(conjunto$Vecinos, conjunto$Especie)
+
+vec.esp <- table(conjunto$Vecinos, conjunto$Especie)
+addmargins(as.table(vec.esp)) #tabla de sumatoria de vecinos por especie
+vec.esp1 <- addmargins(as.table(vec.esp))
+vec.esp1
 
 
 
@@ -64,7 +76,7 @@ vecyesp
 altura <- conjunto$Altura
 range(altura)
 
-Intervalo <- seq(8, 21, by= 4)
+Intervalo <- seq(7.5, 22.5, by= 5) #Categorías diamétricas
 Intervalo
 
 altura.table <- cut(altura, Intervalo)
@@ -74,18 +86,23 @@ altura.prop <- cbind(table(altura.table))
 altura.per <- round(prop.table(altura.prop)*100,2)
 
 
+par(mfrow=c(1,2))
+hist(altura, main = "datos sin intervalo definido", col= "coral4")
+hist(conjunto$Altura, breaks = Intervalo, main = "Datos con intervalo definido",
+     col= "darksalmon")
+par(mfrow=c(1,1))
 
 # Ejercicio 5 -------------------------------------------------------------
 
 diametro <- conjunto$Diametro
 range(diametro)
 
-Intervalo <- seq(7.5, 25.5, by= 2.5)
+Intervalo <- seq(7.5, 27.5, by= 5)
 Intervalo
 
 par(mfrow=c(1,2))
-hist(conjunto$Diametro, main = "Sin modificar", xlab = "Diametro", col= "grey")
-hist(conjunto$Diametro, breaks = Intervalo, main = "Datos Intervalo", col = "brown")
+hist(conjunto$Diametro, main = "Sin modificar", xlab = "Diametro", col= "turquoise4")
+hist(conjunto$Diametro, breaks = Intervalo, main = "Datos Intervalo", col = "lightpink2")
 par(mfrow=c(1,1))
 
 
